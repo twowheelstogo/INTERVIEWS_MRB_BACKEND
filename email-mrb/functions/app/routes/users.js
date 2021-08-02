@@ -14,6 +14,7 @@ router.post("/", function(req,res) {
     var candidato = data.candidato;
     var reclutador = data.reclutador;
     var Plaza = data.plaza;
+    var Comentarios = data.Comentarios
 
         //step 1
         let transporter = nodemailer.createTransport({
@@ -27,14 +28,29 @@ router.post("/", function(req,res) {
             }
         });  
 
-        //step 2
-        let mailOptions = {
-            from: "mrboutsorcing.noreply@gmail.com",
-            to: `${to}`,
-            subject: `Revisión Papelería MRB - Puesto: ${Plaza}`,
-            text: `Estimado candidato ${candidato}, se le comenta que su papelería ha sido revisada por ${reclutador}, verificar en el siguiente link https://empleos.mrb.gt/MRB/Papeleria el avance que ha tenido su papelería en su proceso de reclutamiento para la plaza de ${Plaza}.
-            \nCualquier duda o inconveniente que tenga puede comunicarse al siguiente numero (+502) 2299-7600 o al correo de soporte tecnico soporte@twowheelstogo.com.`
+        let mailOptions;
+        if(Comentarios.length > 0)
+        {
+            //step 2
+            mailOptions = {
+                from: "mrboutsorcing.noreply@gmail.com",
+                to: `${to}`,
+                subject: `Revisión Papelería MRB - Puesto: ${Plaza}`,
+                text: `Estimado candidato ${candidato}, se le comenta que su papelería ha sido revisada por ${reclutador}, verificar en el siguiente link https://papersboxgt.com/Papeleria el avance que ha tenido su papelería en su proceso de reclutamiento para la plaza de ${Plaza}.   
+                \nLas observaciones que debe de tomar en cuenta para subir nuevamente sus archivos son: \n${Comentarios}                     
+                \nCualquier duda o inconveniente que tenga puede comunicarse al siguiente número (+502) 2299-7600 o al correo de soporte técnico soporte@twowheelstogo.com.`
+            }
         }
+        else{
+            //step 2
+            mailOptions = {
+                from: "mrboutsorcing.noreply@gmail.com",
+                to: `${to}`,
+                subject: `Revisión Papelería MRB - Puesto: ${Plaza}`,
+                text: `Estimado candidato ${candidato}, se le comenta que su papelería ha sido revisada por ${reclutador}, verificar en el siguiente link https://papersboxgt.com/Papeleria el avance que ha tenido su papelería en su proceso de reclutamiento para la plaza de ${Plaza}.                        
+                \nCualquier duda o inconveniente que tenga puede comunicarse al siguiente número (+502) 2299-7600 o al correo de soporte técnico soporte@twowheelstogo.com.`
+            }
+        }     
 
         //step 3
         transporter.sendMail(mailOptions,function(err,data){
