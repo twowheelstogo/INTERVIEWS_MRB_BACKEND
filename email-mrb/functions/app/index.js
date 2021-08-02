@@ -9,6 +9,6 @@ var usersRouter = require('./routes/users');
 main.use(cors());
 main.use(bodyParser.json());
 main.use(bodyParser.urlencoded({ extended: false }));
-main.use('/send-mail', usersRouter);
+main.use('/', usersRouter);
 
 module.exports = main;
