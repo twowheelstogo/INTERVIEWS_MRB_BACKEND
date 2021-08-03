@@ -83,10 +83,11 @@ router.post('/jwt', function(req, res) {
 
 router.get('/verificar', function(req,res){
     try {
-        const tokenDecodedData = jsonWebToken.verify(req.query.token, myJWTSecretKey);
+        const tokenDecodedData = jsonWebToken.verify(req.query.token, myJWTSecretKey);                     
+
         return res.json({
             error: false,
-            data: tokenDecodedData
+            data: tokenDecodedData,          
         });
     } catch (error) {
         res.json({
