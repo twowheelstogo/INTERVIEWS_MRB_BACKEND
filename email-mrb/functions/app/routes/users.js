@@ -3,6 +3,7 @@ const express = require("express")
 const router = express.Router()
 const nodemailer = require('nodemailer')
 const jsonWebToken = require('jsonwebtoken');
+const crypto = require("crypto");
 
 router.use(express.json())
 router.use(express.urlencoded({ extended: false }));
@@ -73,6 +74,22 @@ router.post('/jwt', function(req, res) {
     const datos = {
         id: id,
         fecha: fecha
+    };
+
+    const token = jsonWebToken.sign(datos, "1234", { expiresIn: "1h"});
+    res.json({
+        token: token
+    });
+})
+
+router.post('/jwtAdmin', function(req, res) {
+    
+    var data = req.body    
+    var usuario = data.usuario
+    let hashedPass = crypto.createHash("sha512").update(data.pass).digest("hex");        
+    const datos = {
+        usuario: usuario,
+        pass: hashedPass
     };
 
     const token = jsonWebToken.sign(datos, "1234", { expiresIn: "1h"});
