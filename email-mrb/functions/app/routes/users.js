@@ -75,7 +75,7 @@ router.post('/jwt', function(req, res) {
         fecha: fecha
     };
 
-    const token = jsonWebToken.sign(datos, "1234", { expiresIn: "15min"});
+    const token = jsonWebToken.sign(datos, "1234", { expiresIn: "1h"});
     res.json({
         token: token
     });
