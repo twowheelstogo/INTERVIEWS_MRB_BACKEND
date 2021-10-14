@@ -17,8 +17,8 @@ router.get("/", async function(req,res) {
     var reclutador = req.query.reclutador;
     var checklist = req.query.checklist;    
     
-    //url contiene el archivo formik
-    const url = 'https://firebasestorage.googleapis.com/v0/b/empleosmrb.appspot.com/o/Papeleria_MRB%2FCaratula-Check-list%20(4).pdf?alt=media&token=c627677a-8cdd-4a81-bee4-6033685507e9'    
+    //url contiene el archivo formik    
+    const url = 'https://firebasestorage.googleapis.com/v0/b/empleosmrb.appspot.com/o/pdf%2FCaratula-CheckList.pdf?alt=media&token=712e42d3-e93e-40b2-8750-b83744e9469f' 
     const formPdfBytes = await fetch(url).then(res => res.arrayBuffer())
 
     const pdfDoc = await PDFDocument.load(formPdfBytes)
