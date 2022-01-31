@@ -25,8 +25,8 @@ router.post("/send-mail", function (req, res) {
     ignoreTLS: false,
     secure: false, // use SSL
     auth: {
-      user: "mrb.outsourcing.noreply@gmail.com",
-      pass: "MRB$2021$",
+      user: "logistica@mrb.gt",
+      pass: "MRB2021@",
     },
   });
 
@@ -34,7 +34,7 @@ router.post("/send-mail", function (req, res) {
   if (Comentarios.length > 0) {
     //step 2
     mailOptions = {
-      from: "mrb.outsourcing.noreply@gmail.com",
+      from: "logistica@mrb.gt",
       to: `${to}`,
       subject: `Revisión Papelería MRB - Puesto: ${Plaza}`,
       text: `Estimado candidato ${candidato}, se le comenta que su papelería ha sido revisada por ${reclutador}, verificar en el siguiente link https://papersboxgt.com/Papeleria el avance que ha tenido su papelería en su proceso de reclutamiento para la plaza de ${Plaza}.   
